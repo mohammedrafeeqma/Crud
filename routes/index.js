@@ -28,8 +28,15 @@ router.get("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const post = await Crud.findById(req.params.id);
+    if(post)
+    {
     await post.updateOne(req.body);
-    res.status(200).json("the post has been updated");
+    res.status(200).json("post has been updated");
+    }
+    else{
+        res.status(401).json('post not available')
+    }
+    
   } catch (error) {
       res.json('error')
   }
@@ -38,9 +45,16 @@ router.put("/:id", async (req, res) => {
 //delete post
 router.delete("/:id", async (req, res) => {
   try {
+    
     const post = await Crud.findById(req.params.id);
+    if(post)
+    {
     await post.deleteOne();
-    res.status(200).json("the post has been deleted");
+    res.status(200).json("post has been deleted");
+    }
+    else{
+        res.status(401).json('post is not available')
+    }
   } catch (error) {
     res.json("error");
   }

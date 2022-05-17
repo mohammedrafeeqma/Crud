@@ -26,7 +26,7 @@ app.use(function(err, req, res, next) {
     console.log("error consoling");
     console.log(err);
     res.status(500);
-    res.json('error');
+    res.json(err);
   });
 
   const PORT = process.env.PORT || 3001
